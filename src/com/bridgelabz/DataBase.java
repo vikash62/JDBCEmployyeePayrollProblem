@@ -10,8 +10,10 @@ public class DataBase {
 
     public static void main(String[] args) throws SQLException {
         a = connected();
-        reteriveData(a);
-        // updateData(a);
+        //       reteriveData(a);
+        //       updateData(a);
+        //       reteriveDataByName(a);
+        particularDateRange(a);
     }
 
 
@@ -46,13 +48,14 @@ public class DataBase {
         preparedStatement.setString(2, "Terisa");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            //      System.out.println(resultSet.getInt("id"));
-            //    System.out.println(resultSet.getString("salary"));
+            System.out.println(" ");
+            System.out.println(resultSet.getInt("id"));
+            System.out.println(resultSet.getString("salary"));
+            System.out.println(resultSet.getString("dept"));
+            System.out.println(resultSet.getString("startDate"));
+            System.out.println(resultSet.getString("phoneNum"));
             salary = (resultSet.getString("salary"));
 
-            //    deptName = (resultSet.getString("dept"));
-
-            //      System.out.println(resultSet.getString("startDate"));
         }
         return salary;
     }
@@ -69,6 +72,40 @@ public class DataBase {
 //            salary = (resultSet.getString("salary"));
 //            System.out.println(salary);
 //        }
+    }
+
+    public static String reteriveDataByName(Connection connection) throws SQLException {
+        String salary = null;
+        String query = "select * from employeePayroll where name =?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, "Terisa");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            salary = (resultSet.getString("salary"));
+        }
+        return salary;
+    }
+
+
+    public static String particularDateRange(Connection connection) throws SQLException {
+        String name = null;
+        String query = "select * from employeePayroll where startDate between ? and ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1,"1-1-2022" );
+        preparedStatement.setString(2, "10-2-2022");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            System.out.println(" ");
+            System.out.println(resultSet.getInt("id"));
+            System.out.println(resultSet.getString("salary"));
+            System.out.println(resultSet.getString("dept"));
+            System.out.println(resultSet.getString("startDate"));
+            System.out.println(resultSet.getString("phoneNum"));
+            System.out.println(resultSet.getString("name"));
+            name = (resultSet.getString("name"));
+
+        }
+        return name;
     }
 
     public static void listDrivers() {
