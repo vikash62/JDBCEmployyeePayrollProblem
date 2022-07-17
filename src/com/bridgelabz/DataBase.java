@@ -124,6 +124,18 @@ public class DataBase {
         }
         return salary;
     }
+    public static String avgSalary(Connection connection) throws SQLException {
+        String avgSalary = null;
+        String query = "select avg(salary) as salary from employeePayroll where gender = ? group by gender";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, "M");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            avgSalary = (resultSet.getString("salary"));
+            System.out.println("Average salary of males is: " + avgSalary);
+        }
+        return avgSalary;
+    }
 
     public static void listDrivers() {
         Enumeration<Driver> driverList = DriverManager.getDrivers();
