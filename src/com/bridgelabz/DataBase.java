@@ -21,7 +21,7 @@ public class DataBase {
         try {
             System.out.println("Connecting to database: " + jdbcUrl);
             connection = DriverManager.getConnection(jdbcUrl, userName, password);
-            System.out.println("Connection is Successful" + connection);
+            System.out.println("Connection is Successful" + connection); 
         } catch (Exception e) {
             e.printStackTrace();
         }
